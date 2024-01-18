@@ -9,11 +9,11 @@ const Header = () => {
          </div>
          <div className='navlist'>
             <ul>
-                <li><a href="default.asp">DESTINATION</a></li>
-                <li><a href="default.asp">FOOD</a></li>
-                <li><a href="default.asp">WELLBEING</a></li>
-                <li><a href="default.asp">SIGN UP</a></li>
-                <li><a href="default.asp">SIGN IN</a></li>
+                <li><a href="">DESTINATION</a></li>
+                <li><a href="">FOOD</a></li>
+                <li><a href="">WELLBEING</a></li>
+                <li><a href="/signup">SIGN UP</a></li>
+                <li><a href="/signin">SIGN IN</a></li>
             </ul>
          </div>
       </div>
