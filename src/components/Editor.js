@@ -4,7 +4,7 @@ import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 const Editor  = () => {
-    const [value, setValue] = React.useState("**Hello world!!!**");
+    const [value, setValue] = React.useState("");
     const [selectedTab, setSelectedTab] = React.useState(
       "write"
     );

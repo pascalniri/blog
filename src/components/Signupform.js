@@ -1,12 +1,28 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-const Signupform = () => {
-  const { register, handleSubmit} = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup'
+ import Header from './Header';
+  const schema = yup.object().shape({
+     firstName: yup.string().required("Enter a name"),
+     lastName: yup.string().required(),
+     email: yup.string().email().required(),
+     password: yup.string().min(6).max(20).required()
+  })
+
+  const Signupform = () => {
+    const { register, handleSubmit} = useForm({
+      resolver: yupResolver(schema)
+    });
+    const onSubmit = (data) => {
+      console.log(data);
+    };
+
+   
+
   return (
     <div>
+      <Header/>
       <form className="form" onSubmit = {handleSubmit(onSubmit)}>
         <div className='form-des'>
             <h1>SIGN UP</h1>
