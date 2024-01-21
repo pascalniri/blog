@@ -4,6 +4,7 @@ import bg from '../images/bg.jpg';
 const Grid = () => {
   return (
     <div className='grid'>
+      <h1>Recent Blog Posts</h1>
       <div className="container">
         {/* image1 */}
         <div className="box-1">
