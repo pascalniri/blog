@@ -1,41 +1,47 @@
-import React, {useState}from 'react'
-import 'react-quill/disk/quill.snow.css'
+import React from 'react'
+import {useForm} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup'
+import axios from 'axios';
 const Create = () => {
- const [title, setTitle] = useState('')
- const [category, setCategory] = useState('Uncategorized')
- const [description, setDescription] = useState('')
- const [thumbnail, setThumbnail] = useState('')
+  
+  const schema = yup.object().shape({
+    title: yup.string().required("Provide a blog title"),
+    description: yup.string().required('Provide a blog description'),
+    image: yup.mixed().required(),
+ })
+ const { register, handleSubmit} = useForm({
+  // resolver: yupResolver(schema)
+});
+const onSubmit = async (data) => {
+  console.log(data)
 
- const modules ={
-  toolbar:[
-    [{'header':[1, 2, false]}],
-    ['bold', 'italic', 'underline','strike','blockquote'],
-    [{'list':'orderd'}, {'list':'bullet'}, {'indent':'-1'}, {'indent':'+1'}],
-    ['link', 'image'],
-    ['clean']
-  ]
- }
- const formats=[
-   'header',
-    'bold', 'italic', 'underline','strike','blockquote',
-    'list','bullet','indent',
-    'link', 'image'
- ]
- const POST_CATEGORY =["Agriculture", "Development", "Education", "Entertainment", "Art"]
+  const forData = new FormData();
+  forData.append("title",data.title)
+  forData.append("description",data.description)
+  forData.append("image", data.image[0])
+
+
+
+  try {
+    const url = "https://blogapi-se2j.onrender.com/api/v1/blogs"
+    const res = await axios.post(url, forData);
+    alert('Blog published successfully')
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+}; 
   return (
     <div className='main-container'>
-        <form className='form-container'>
-            <input type='text' name='title' placeholder='Write Title' value={title} onChange={e => setTitle(e.target.value)}
-             autoFocus
-            /> 
-          <select name='category' value={category} onChange={e => setCategory(e.target.value)}>
-              {
-                POST_CATEGORY.map(cat => <option key={cat}>{cat}</option>)
-              }
-              <input type="file" onChange={e => setThumbnail(e.target.files[0])} accept='png, jpg, jpeg'/>
-              <button type='submit' className='btn-primary'>Create</button>
-          </select>
+        <form className='form-container' onSubmit={handleSubmit(onSubmit)}>
+            <input type='text' name='title' placeholder='Write Title' {...register('title')}/> 
+            <input type='text' name='desc' placeholder='Write Description' {...register('description')}/>
+            <input type='file' name='desc' placeholder='Write Description' className='file-area' {...register('image')}/>       
+            <button className='newblog-btn' type='submit' >Post</button>
+            <button className='newblog-btn' type='submit' >Post</button>
         </form>
+        
     </div>
   )
 }

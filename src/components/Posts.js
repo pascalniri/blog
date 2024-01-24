@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import Post from './Post';
 import Header from './Header';
+// import Footer from './Footer';
 const Posts = () => {
   const [records, setRecords] = useState([])
   const [blogs,setBlogs] = useState([])

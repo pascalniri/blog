@@ -1,23 +1,49 @@
 import React from 'react'
-import Footer from './Footer';
+// import axios from 'axios'
+
+import { useState, useEffect,useContext } from 'react'
+import { Link, useNavigate} from 'react-router-dom'
+import { myContext } from './Contex'
 
   const Blogs = () => {
-   
+   const [data, setData] = useState([])
+   const navigate = useNavigate()
+   const {blog} = useContext(myContext)
+
+  //  useEffect(() => {
+  //   axios.get('https://jsonplaceholder.typicode.com/users')
+  //   .then(res => setData(res.data))
+  //   .catch(err => console.log(err))
+  //  }, [])
   return (
 <div>
     <table>
         <tr>
-            <th>IMAGE LINK</th>
-            <th>DESCRIPTION</th>
+            <th>TITLE</th>
+            <th>IMAGE</th>
             <th>ACTION</th>
         </tr>
-        <tr>
-            <td>kkdoe</td>
-            <td>kkdoejdowjd</td>
-            <td><button className='add'>Edit</button><button className='delete'>Delete</button></td>
-        </tr>
+                
+              
+               {
+                    blog.map((singleRow,index)=>{
+                      return(
+                      <tr>
+                        <td>{singleRow.title}</td>
+                        <td>{singleRow.image}</td>
+                        <td>{singleRow.name}</td>
+                        <td>
+                          <button className='update'>Update</button>
+                          <button className='delete'>Delete</button>
+                          <button className='read'>Read</button>
+                        </td>
+                      </tr>
+                      )
+                    })
+                }
+               
+      
     </table>
-    <Footer/>
   </div>
 
   )
