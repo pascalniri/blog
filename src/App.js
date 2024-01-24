@@ -37,7 +37,6 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomeUI/>} />
             <Route path='/signin' element={<Signin/>} />
-            <Route path='/editor' element={<Editor/>} />
             <Route path='/signup' element={<Signupform/>} />
             <Route path='/blogs' element={<Blogs/>} />
             <Route path='/posts' element={<Posts/>} />
